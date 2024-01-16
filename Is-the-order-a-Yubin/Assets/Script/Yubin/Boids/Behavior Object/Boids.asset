@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288e9ce786a741241890bba743055bfd, type: 3}
+  m_Name: Boids
+  m_EditorClassIdentifier: 
+  behaviors:
+  - {fileID: 11400000, guid: 3a64feb2c49d24c4887b0a79c4727c7a, type: 2}
+  - {fileID: 11400000, guid: 521d74ca70bf5224aa65e6adaf0890ed, type: 2}
+  - {fileID: 11400000, guid: 6537de131a5c2ee45963622e9d20c90e, type: 2}
+  - {fileID: 11400000, guid: a1234ff5e37716547bc2fea86b54a3a1, type: 2}
+  - {fileID: 11400000, guid: 38b92b6ca5507044da1c76bd781a72f8, type: 2}
+  weights:
+  - 4
+  - 1
+  - 2
+  - 0.1
+  - 5
