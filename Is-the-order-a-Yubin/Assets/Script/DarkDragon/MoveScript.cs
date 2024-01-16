@@ -17,6 +17,8 @@ public class MoveScript : MonoBehaviour
     public bool attacked = false;
     public Image nowHpbar;
 
+    float timer;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "fire")
@@ -26,18 +28,15 @@ public class MoveScript : MonoBehaviour
         }
     }
 
-    void AttackTrue()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        attacked = true;
-    }
-    void AttackFalse()
-    {
-        attacked = false;
-    }
-    void SetAttackSpeed(float speed)
-    {
-        //animator.SetFloat("attackSpeed", speed);
-        atkSpeed = speed;
+        timer += Time.deltaTime;
+        if (timer > 0.25f)
+        {
+            if (collision.tag == "filed")
+                nowHp -= 1;
+            timer = 0;
+        }
     }
 
     void Start()
@@ -45,10 +44,9 @@ public class MoveScript : MonoBehaviour
         maxHp = 50;
         nowHp = 50;
         atkDmg = 30;
-        //animator = GetComponent<Animator>;
-        SetAttackSpeed(1.5f);
         rigidbody = GetComponent<Rigidbody>();
     }
+
     void Update()
     {
         nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
@@ -70,7 +68,7 @@ public class MoveScript : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Space))
         {
-            AttackTrue();
+            attacked = true;
         }
     }
 }

@@ -18,15 +18,16 @@ public class DarkDragon : MonoBehaviour
 {
     public GameObject prfFire;
     public Transform target;
-    Vector3 whereToAtk;
-    Vector3 playerPos;
     Enemy enemy;
+    GameObject eatfield;
 
     private DarkDragonState dragonState;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        eatfield = transform.GetChild(0).gameObject;
+        eatfield.SetActive(false);
         enemy = GetComponent<Enemy>();
         ChangeState(DarkDragonState.Idle);
     }
@@ -118,6 +119,7 @@ public class DarkDragon : MonoBehaviour
     {
         int i = 0;
         Debug.Log("¸ÔÀÌ²ø¾î´ç±â±â");
+        eatfield.gameObject.SetActive(true);
 
         while (i < 3)
         {
@@ -125,6 +127,8 @@ public class DarkDragon : MonoBehaviour
             Debug.Log("Äí¿Í¾Æ¾Ó");
             yield return new WaitForSeconds(1);
         }
+
+        eatfield.gameObject.SetActive(false);
         enemy.isAttaking = false;
         ChangeState(DarkDragonState.Idle);
     }
