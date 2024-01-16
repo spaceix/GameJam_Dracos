@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuakeAttack : MonoBehaviour
+public class DustGeneration : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
     public float angle = 10f;
+
+    private float attackAngle;
+
     public Vector3 startSize = new Vector3(1f, 1f, 1f);
     public Vector3 targetSize = new Vector3(1.5f, 1.5f, 1.5f);
 
     public Color startColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     public Color targetColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+
     public float animationDuration = 2.0f;
     public float fadeDuration = 2.0f;
 
@@ -19,13 +23,16 @@ public class QuakeAttack : MonoBehaviour
     private Vector3 originalSize;
     private Color originalColor;
 
-    private float attackAngle;
-
     // Start is called before the first frame update
     void Start()
     {
+        // prefab을 시간에 맞게 지운다
         Destroy(gameObject, lifeTime);
+
+        // 발사체 무작위 각도 설정
         attackAngle = Random.Range(-angle, angle);
+
+        // 색 바꾸기
         originalColor = startColor;
     }
 
