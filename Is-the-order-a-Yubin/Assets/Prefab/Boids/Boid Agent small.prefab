@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2366781270973942841}
   - component: {fileID: 2645746741848903633}
   - component: {fileID: -9176441130944424737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boid Agent small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
