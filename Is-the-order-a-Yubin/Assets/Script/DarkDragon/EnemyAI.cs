@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
                 MoveToTarget();
             else
             {
-                List<Skill> skill= new List<Skill>();
+                List<Skill> skill = new List<Skill>();
 
                 for (int i = 0; i < enemy.SkillList.Length; i++)
                 {
@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
                             skill.Add(enemy.SkillList[i]);
                 }
 
-                if(skill.Count > 0)
+                if (skill.Count > 0)
                 {
                     int i = Random.Range(0, skill.Count);
                     AttackTarget(skill[i]);

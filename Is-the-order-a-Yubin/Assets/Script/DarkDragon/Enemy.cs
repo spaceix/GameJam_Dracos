@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
         SkillList[2].SetSkill("원형불", 13f, 5f, 3);
         SkillList[3].SetSkill("먹이응집", 13f, 10f, 4);
         SkillList[4].SetSkill("원형화염구", 12f, 10f, 5);
-        SkillList[5].SetSkill("부채꼴화염구", 7f, 10f, 6);
+        SkillList[5].SetSkill("부채꼴화염구", 7f, 15f, 6);
     }
 
     private void SetEnemyStatus(string _enemyName, int _maxHp,
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
     public float height = 1.7f;
 
     public MoveScript Player;
-    
+
 
     void Start()
     {
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         hpBar.position = _hpBarPos;
         nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

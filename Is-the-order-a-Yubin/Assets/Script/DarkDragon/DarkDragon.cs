@@ -33,7 +33,7 @@ public class DarkDragon : MonoBehaviour
 
     public void SetState(int num)
     {
-        switch(num)
+        switch (num)
         {
             case 0: ChangeState(DarkDragonState.Idle); break;
             case 1: ChangeState(DarkDragonState.TailAttack); break;
@@ -150,7 +150,7 @@ public class DarkDragon : MonoBehaviour
         int i = 0;
         Debug.Log("부채꼴화염구");
 
-        while (i<3)
+        while (i < 3)
         {
             i++;
             Fanshoot();
@@ -177,12 +177,13 @@ public class DarkDragon : MonoBehaviour
 
     private void Fanshoot()
     {
-        for (int i = 0; i < 60; i += 6)
+        Vector3 vec = transform.rotation.eulerAngles;
+        for (int i = 0; i < 60; i += 10)
         {
             GameObject temp = Instantiate(prfFire);
             Destroy(temp, 2f);
             temp.transform.position = transform.position;
-            temp.transform.rotation = Quaternion.Euler(0, 0, i);
+            temp.transform.Rotate(new Vector3(vec.x, vec.y, vec.z - 30 + i));
         }
     }
 
