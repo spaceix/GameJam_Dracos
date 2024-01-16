@@ -4,13 +4,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class GroundDragonMove : MonoBehaviour
 {
-    public GroundDragonAttack groundDragonAttack;
     public GameObject Player;
     public float speed = 1;
     public double stoppingDistance = 3;
+
+    private GroundDragonAttack groundDragonAttack;
     void Start()
     {
-
+        groundDragonAttack = GetComponent<GroundDragonAttack>();
     }
     void Update()
     {

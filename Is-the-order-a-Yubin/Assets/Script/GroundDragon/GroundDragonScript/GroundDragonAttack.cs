@@ -10,13 +10,13 @@ public class GroundDragonAttack : MonoBehaviour
     public GameObject dustPrefab; // 먼지 Prefab
     public GameObject skillRangePrefab; // 스킬 범위 Prefab
     public GameObject sPoint;
-
+    public QuackAttack quackAttack;
     public bool isAttacking = false; // 공격 중인지 여부를 나타내는 변수
     public float nomalAttackCooldownTime = 2f; // 쿨타임 간격 (초)
 
+    private float skillTimer = 0f;
     private float cooldownTimer = 0f; // 쿨타임 타이머
-    public int skill = 0;
-
+    private int skill = 0;
     void Start()
     {
 
@@ -35,7 +35,7 @@ public class GroundDragonAttack : MonoBehaviour
             if (skill == 3)
                 Terrain();
             else if (skill == 6)
-                ShowSkillRange();
+                QuakeSkill();
             else
                 StoneAttack();
             cooldownTimer = 0f; // 타이머 초기화
@@ -53,20 +53,30 @@ public class GroundDragonAttack : MonoBehaviour
     {
         isAttacking = true;
         for (int i = 0; i < 3; i++)
+        {
             Instantiate(terrainPrefab, sPoint.transform.position, sPoint.transform.rotation);
+        }
         skill++;
     }
-    private void QuakeSkillAttack()
+    private void QuakeSkill()
     {
         isAttacking = true;
-        for (int i = 0; i < 20; i++)
-            Instantiate(dustPrefab, transform.position, transform.rotation);
+        Instantiate(skillRangePrefab, transform.position, Quaternion.identity);
+
+        skillTimer += Time.deltaTime;
+
+        if (skillTimer >= quackAttack.skillInterval)
+        {
+            for (int i = 0; i < 20; i++)
+                Instantiate(dustPrefab, transform.position, transform.rotation);
+            skillTimer = 0f; // 타이머 초기화
+        }
+
+        skill = 0;
     }
     private void ShowSkillRange()
     {
-        isAttacking = true;
-        Instantiate(skillRangePrefab, transform.position, transform.rotation);
-        skill = 0;
+
     }
 
 }

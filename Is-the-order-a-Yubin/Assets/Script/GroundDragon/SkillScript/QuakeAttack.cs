@@ -13,18 +13,19 @@ public class QuackAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skillTimer += Time.deltaTime;
 
-        if (skillTimer >= skillInterval)
-        {
-            Destroy(gameObject);
-            skillTimer = 0f; // 타이머 초기화
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        skillTimer += Time.deltaTime;
 
+        if (skillTimer >= skillInterval)
+        {
+            Instantiate(quakePrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            skillTimer = 0f; // 타이머 초기화
+        }
     }
 }
