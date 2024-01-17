@@ -25,7 +25,7 @@ public class RedDragon_Move : MonoBehaviour
             // Check if the distance is less than or equal to 5 and isAttacking
             if (distanceToPlayer <= 6.5 && !isAttacking)
             {
-                StartCoroutine(AttackMultipleTimes(Random.Range(10, 300), 0.02f));
+                StartCoroutine(AttackMultipleTimes(Random.Range(50, 200), 0.02f));
             }
 
             if (distanceToPlayer > stoppingDistance && !isAttacking)
