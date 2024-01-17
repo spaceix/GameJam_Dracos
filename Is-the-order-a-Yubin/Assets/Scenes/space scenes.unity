@@ -239,11 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stonePrefab: {fileID: 7158198653526652253, guid: b50407239213fc642a78f0c6b5eb2167, type: 3}
   terrainPrefab: {fileID: 6679074462486204116, guid: 0c4bc5bf80e6149418b1ad1f75958048, type: 3}
-  dustPrefab: {fileID: 3499080427860331995, guid: 1d21c948d42d41f4bb7282723bc41698, type: 3}
+  dustRangePrefab: {fileID: 85022786578567729, guid: e68bd1622403c2849a812783d54ea1b7, type: 3}
   skillRangePrefab: {fileID: 6783043491529376768, guid: 4c19838a1125d9b4998238ea75ae9469, type: 3}
   sPoint: {fileID: 347052246}
+  quackAttack: {fileID: -3028200065919786413, guid: 4c19838a1125d9b4998238ea75ae9469, type: 3}
   isAttacking: 0
-  nomalAttackCooldownTime: 2
+  nomalAttackCooldownTime: 1
 --- !u!1 &347052246
 GameObject:
   m_ObjectHideFlags: 0

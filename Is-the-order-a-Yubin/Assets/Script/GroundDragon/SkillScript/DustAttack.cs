@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class QuackAttack : MonoBehaviour
+public class DustAttack : MonoBehaviour
 {
-    public GameObject quakePrefab; // 균열 Prefab
+    public GameObject dustPrefab; // 먼지 Prefab
 
     private float skillInterval = 2f; // 쿨타임 간격 (초)
     private float skillTimer = 0f; // 쿨타임 타이머
@@ -23,7 +23,8 @@ public class QuackAttack : MonoBehaviour
 
         if (skillTimer >= skillInterval)
         {
-            Instantiate(quakePrefab, transform.position, Quaternion.identity);
+            for (int i = 0; i < 30; i++)
+                Instantiate(dustPrefab, transform.position, transform.rotation);
 
             Destroy(gameObject);
             skillTimer = 0f; // 타이머 초기화

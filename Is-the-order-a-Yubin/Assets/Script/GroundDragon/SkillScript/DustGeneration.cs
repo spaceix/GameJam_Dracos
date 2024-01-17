@@ -6,7 +6,7 @@ public class DustGeneration : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
-    public float angle = 10f;
+    public float angle = 20f;
 
     private float attackAngle;
 

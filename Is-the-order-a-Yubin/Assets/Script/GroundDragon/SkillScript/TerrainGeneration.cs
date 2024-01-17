@@ -6,8 +6,8 @@ using UnityEngine;
 public class TerrainGeneration : MonoBehaviour
 {
     public float speed;
-    public float lifeTime;
-    public float angle = 10f;
+    public float lifeTime = 20f;
+    public float angle = 20f;
 
     public float nomalStopTime = 2f;
     private float stopTimer = 0f;
@@ -50,11 +50,13 @@ public class TerrainGeneration : MonoBehaviour
         if (stopTimer >= nomalStopTime)
         {
             if (move)
+            {
                 Instantiate(skillRangePrefab, transform.position, Quaternion.identity);
-            rigid2D.velocity = Vector2.zero;
-            move = false;
-            rigid2D.constraints = RigidbodyConstraints2D.FreezeAll;
-            capsuleCollider2D.enabled = true;
+                rigid2D.velocity = Vector2.zero;
+                rigid2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                capsuleCollider2D.enabled = true;
+                move = false;
+            }
             stopTimer = 0f; // 타이머 초기화
         }
     }

@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113fd33d5c3fb744d8e297047ccb073d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  lifeTime: 10
+  speed: 10
+  lifeTime: 20
   angle: 10
-  nomalStopTime: 2
+  nomalStopTime: 0.5
   skillRangePrefab: {fileID: 6783043491529376768, guid: 4c19838a1125d9b4998238ea75ae9469, type: 3}
