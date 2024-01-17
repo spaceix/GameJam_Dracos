@@ -4,34 +4,47 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
+// 드래곤의 상태를 정의하는 열거형
 public enum DarkDragonState
 {
-    Idle = 0,       //대기
-    TailAttack,     //꼬리평타
-    ClawsAttack,    //발톱평타
-    FireCircle,     //원형불
-    EattingMob,     //먹이 끌어당기기
-    CircleShoot,    //원형화염구
-    FanShoot        //부채꼴화염구
+    Idle = 0,       // 대기
+    TailAttack,     // 꼬리 평타
+    ClawsAttack,    // 발톱 평타
+    FireCircle,     // 원형 불
+    EattingMob,     // 먹이 끌어당기기
+    CircleShoot,    // 원형 화염구
+    FanShoot        // 부채꼴 화염구
 }
+
 public class DarkDragon : MonoBehaviour
 {
+    // 화염구 프리팹 및 목표 위치
     public GameObject prfFire;
     public Transform target;
+
+    // 적 캐릭터 및 먹이 끌어당기는 영역 관련 변수
     Enemy enemy;
     GameObject eatfield;
 
+    Skill[] SkillList;
+
+    // 현재 드래곤의 상태
     private DarkDragonState dragonState;
 
-    // Start is called before the first frame update
+    // 시작 시 호출되는 함수
     private void Awake()
     {
+        // 먹이 끌어당기는 영역 초기화
         eatfield = transform.GetChild(0).gameObject;
         eatfield.SetActive(false);
+
+        // 적 캐릭터 및 초기 상태 설정
         enemy = GetComponent<Enemy>();
+        SkillList = enemy.SkillList;
         ChangeState(DarkDragonState.Idle);
     }
 
+    // 상태를 설정하는 함수
     public void SetState(int num)
     {
         switch (num)
@@ -47,18 +60,18 @@ public class DarkDragon : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    // 현재 상태에 따라 동작을 수행하는 함수
     private void ChangeState(DarkDragonState newState)
     {
+        // 이전 상태 코루틴 정지
         StopCoroutine(dragonState.ToString());
+
+        // 새로운 상태로 변경 및 해당 상태 코루틴 시작
         dragonState = newState;
         StartCoroutine(dragonState.ToString());
     }
 
+    // 대기 상태에 대한 코루틴
     private IEnumerator Idle()
     {
         Debug.Log("비전투모드");
@@ -68,71 +81,76 @@ public class DarkDragon : MonoBehaviour
             yield return null;
         }
     }
+
+    // 꼬리 평타에 대한 코루틴
     private IEnumerator TailAttack()
     {
         int i = 0;
         Debug.Log("꼬리평타");
+        HitPlayer(6);
 
-        while (i < 0)
-        {
-            Debug.Log("쌔액");
-        }
+        enemy.isAttacking = false;
 
-        enemy.isAttaking = false;
-
+        // 대기 상태로 전환
         ChangeState(DarkDragonState.Idle);
-        yield return null;
+        yield break;
     }
 
+    // 발톱 평타에 대한 코루틴
     private IEnumerator ClawsAttack()
     {
         int i = 0;
         Debug.Log("발톱평타");
 
-        while (i < 0)
-        {
-            Debug.Log("콩");
-        }
+        //while (i < 0)
+        //{
+            HitPlayer(8);
+        //}
 
-        enemy.isAttaking = false;
+        enemy.isAttacking = false;
 
-        yield return null;
+        // 대기 상태로 전환
         ChangeState(DarkDragonState.Idle);
+        yield break;
     }
 
+    // 원형 불에 대한 코루틴
     private IEnumerator FireCircle()
     {
         int i = 0;
         Debug.Log("화염");
-
-        while (i < 3)
-        {
-            i++;
-            Debug.Log("뚜시뚜시");
-            yield return new WaitForSeconds(1);
-        }
-        enemy.isAttaking = false;
-        ChangeState(DarkDragonState.Idle);
-    }
-
-    private IEnumerator EattingMob()
-    {
-        int i = 0;
-        Debug.Log("먹이끌어당기기");
         eatfield.gameObject.SetActive(true);
 
-        while (i < 3)
+        while (i < 5)
         {
             i++;
-            Debug.Log("쿠와아앙");
             yield return new WaitForSeconds(1);
         }
 
         eatfield.gameObject.SetActive(false);
-        enemy.isAttaking = false;
+        enemy.isAttacking = false;
+
+        // 대기 상태로 전환
         ChangeState(DarkDragonState.Idle);
     }
 
+    // 먹이 끌어당기기에 대한 코루틴
+    private IEnumerator EattingMob()
+    {
+        int i = 0;
+        while (i < 3)
+        {
+            i++;
+            yield return new WaitForSeconds(1);
+        }
+
+        enemy.isAttacking = false;
+
+        // 대기 상태로 전환
+        ChangeState(DarkDragonState.Idle);
+    }
+
+    // 원형 화염구에 대한 코루틴
     private IEnumerator CircleShoot()
     {
         int i = 0;
@@ -142,13 +160,16 @@ public class DarkDragon : MonoBehaviour
         {
             i++;
             Circleshoot();
-            Debug.Log("토도도돗");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
+
+        enemy.isAttacking = false;
+
+        // 대기 상태로 전환
         ChangeState(DarkDragonState.Idle);
     }
 
+    // 부채꼴 화염구에 대한 코루틴
     private IEnumerator FanShoot()
     {
         int i = 0;
@@ -158,18 +179,19 @@ public class DarkDragon : MonoBehaviour
         {
             i++;
             Fanshoot();
-            Debug.Log("슝슝슝슝");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
+
+        enemy.isAttacking = false;
+
+        // 대기 상태로 전환
         ChangeState(DarkDragonState.Idle);
     }
 
-    public Transform Target;
-
+    // 원형 화염구 생성 함수
     private void Circleshoot()
     {
-        //360번 반복
+        // 360도 반복
         for (int i = 0; i < 360; i += 13)
         {
             GameObject temp = Instantiate(prfFire);
@@ -179,9 +201,11 @@ public class DarkDragon : MonoBehaviour
         }
     }
 
+    // 부채꼴 화염구 생성 함수
     private void Fanshoot()
     {
         Vector3 vec = transform.rotation.eulerAngles;
+        // 60도씩 증가하면서 10번 반복
         for (int i = 0; i < 60; i += 10)
         {
             GameObject temp = Instantiate(prfFire);
@@ -191,4 +215,9 @@ public class DarkDragon : MonoBehaviour
         }
     }
 
+    private void HitPlayer(int i)
+    {
+        GameObject target = GameObject.Find("Player");
+        target.GetComponent<MoveScript>().nowHp -= i;
+    }
 }
