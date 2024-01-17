@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &89126497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89126498}
+  m_Layer: 0
+  m_Name: sPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89126498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89126497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 228001941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &228001939
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +164,8 @@ GameObject:
   m_Component:
   - component: {fileID: 228001941}
   - component: {fileID: 228001940}
-  - component: {fileID: 228001942}
   - component: {fileID: 228001943}
+  - component: {fileID: 228001942}
   m_Layer: 0
   m_Name: GroundDragon
   m_TagString: Untagged
@@ -206,7 +237,8 @@ Transform:
   m_LocalPosition: {x: -5.71, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 89126498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &228001942
@@ -218,13 +250,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 228001939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f0078c91f94374d86e084fafeda2c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ea09a525ed74c43b66c76e3473e72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1817866805}
-  speed: 1
-  stoppingDistance: 3
-  groundDragonAttack: {fileID: 228001943}
+  stonePrefab: {fileID: 5625894332921461594, guid: b50407239213fc642a78f0c6b5eb2167, type: 3}
+  terrainPrefab: {fileID: 8332137745372443807, guid: 036cecd8ea2f4534991ef414d45ccee1, type: 3}
+  dustRangePrefab: {fileID: 1657495802538608444, guid: 2cc606de4af517641bc4f31dad4a0dde, type: 3}
+  skillRangePrefab: {fileID: 3280696619045271964, guid: c132429ce45053343b2073c7a7a7513e, type: 3}
+  sPoint: {fileID: 89126497}
+  quackAttack: {fileID: -528422651487405795, guid: c132429ce45053343b2073c7a7a7513e, type: 3}
+  isAttacking: 0
+  nomalAttackCooldownTime: 2
 --- !u!114 &228001943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,14 +270,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 228001939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1749227c615e44cb6f2845c7c7310c, type: 3}
+  m_Script: {fileID: 11500000, guid: f47c38cb16b8cc44aba5f76299e1e4e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stonePrefab: {fileID: 7158198653526652253, guid: b50407239213fc642a78f0c6b5eb2167, type: 3}
-  dustPrefab: {fileID: 3499080427860331995, guid: 1d21c948d42d41f4bb7282723bc41698, type: 3}
-  isAttacking: 0
-  nomalAttackCooldownTime: 2
-  skill: 0
+  Player: {fileID: 1817866802}
+  speed: 1
+  stoppingDistance: 3
 --- !u!1 &1465887144
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +526,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1817866809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96da9e6859f5a342aeebe6118270be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
